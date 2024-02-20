@@ -1,6 +1,6 @@
 import os
 import requests
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException
 from typing import Union
 from pydantic import BaseModel
 from atproto import Client, client_utils
@@ -10,6 +10,7 @@ app = FastAPI()
 
 class SkeetRequest(BaseModel):
     content: str
+    authorization: str = Header(None)
 
 
 class TootRequest(BaseModel):
@@ -18,6 +19,9 @@ class TootRequest(BaseModel):
 
 @app.post("/skeet")
 def new_skeet(skeet_request: SkeetRequest):
+    authorization = skeet_request.authorization
+    if authorization:
+        return HTTPException(status_code=401, detail="Unauthorized.")
     client = Client()
     client.login(os.getenv('BSKY_USERNAME', 'Bluesky username not found'),
                  os.getenv('BSKY_PASSWORD', 'Bluesky password not found'))

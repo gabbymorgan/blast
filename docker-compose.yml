@@ -9,5 +9,6 @@ services:
       - BSKY_PASSWORD=${BSKY_PASSWORD}
       - MASTODON_BASE_URL=${MASTODON_BASE_URL}
       - MASTODON_TOKEN=${MASTODON_TOKEN}
+      - APP_TOKEN=${APP_TOKEN}
     ports:
       - 8083:80
