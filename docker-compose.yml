@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  blast:
+    image: blast
+    container_name: blast
+    environment:
+      - BSKY_USERNAME=${BSKY_USERNAME}
+      - BSKY_PASSWORD=${BSKY_PASSWORD}
+      - MASTODON_BASE_URL=${MASTODON_BASE_URL}
+      - MASTODON_TOKEN=${MASTODON_TOKEN}
+    ports:
+      - 8083:80
