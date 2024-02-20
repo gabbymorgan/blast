@@ -17,6 +17,11 @@ class TootRequest(BaseModel):
     content: str
 
 
+@app.get("/")
+def health_check():
+    return {}
+
+
 @app.post("/skeet")
 def new_skeet(skeet_request: SkeetRequest):
     authorization = skeet_request.authorization
